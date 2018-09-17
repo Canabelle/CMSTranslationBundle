@@ -1,0 +1,42 @@
+services:
+    canabelle.cms.admin.token:
+        class: Canabelle\CMSTranslationBundle\Admin\LanguageTokenAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Translations }
+        arguments: [null, Canabelle\CMSTranslationBundle\Entity\LanguageToken, CanabelleCMSTranslationBundle:LanguageTokenAdmin]
+        calls:
+            - [ setTranslationDomain, [CanabelleCMSTranslationBundle] ]
+            - [ setSiteManager, [@sonata.page.manager.site] ]
+            - [ setSitePool, [@ok99.privatezone.site.pool] ]
+
+    canabelle.cms.admin.translation:
+        class: Canabelle\CMSTranslationBundle\Admin\LanguageTranslationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Translations }
+        arguments: [null, Canabelle\CMSTranslationBundle\Entity\LanguageTranslation, null, @ok99.privatezone.site.pool]
+        calls:
+            - [ setTranslationDomain, [CanabelleCMSTranslationBundle] ]
+
+    canabelle.cms.admin.system_token:
+        class: Canabelle\CMSTranslationBundle\Admin\SystemLanguageTokenAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: System translations }
+        arguments: [null, Canabelle\CMSTranslationBundle\Entity\LanguageToken, CanabelleCMSTranslationBundle:SystemLanguageTokenAdmin]
+        calls:
+            - [ setTranslationDomain, [CanabelleCMSTranslationBundle] ]
+
+    canabelle.cms.admin.system_translation:
+        class: Canabelle\CMSTranslationBundle\Admin\SystemLanguageTranslationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: System translations }
+        arguments: [null, Canabelle\CMSTranslationBundle\Entity\LanguageTranslation, null, @translator, %canabelle_cms_translation.locales%]
+        calls:
+            - [ setTranslationDomain, [CanabelleCMSTranslationBundle] ]
+
+    canabelle.cms.admin.language_catalogue:
+        class: Canabelle\CMSTranslationBundle\Admin\LanguageCatalogueAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Katalogy }
+        arguments: [null, Canabelle\CMSTranslationBundle\Entity\LanguageCatalogue, null]
+        calls:
+            - [ setTranslationDomain, [CanabelleCMSTranslationBundle] ]

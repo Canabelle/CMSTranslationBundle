@@ -1,0 +1,33 @@
+{% block canabelle_cms_translations_widget %}
+    {{ form_errors(form) }}
+    <div class="canabelle_cms_translations tabbable">
+        <ul class="canabelle_cms_translationsLocales nav nav-tabs">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+
+            <li {% if app.request.locale == locale %}class="active"{% endif %}>
+                <a href="#" data-toggle="tab" data-target=".canabelle_cms_translationsFields-{{ locale }}">
+                    {{ locale|capitalize }}
+                    {% if form.vars.default_locale == locale %}[Default]{% endif %}
+                    {% if translationsFields.vars.required %}*{% endif %}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <div class="canabelle_cms_translationsFields tab-content">
+        {% for translationsFields in form %}
+            {% set locale = translationsFields.vars.name %}
+
+            <div class="canabelle_cms_translationsFields-{{ locale }} tab-pane {% if app.request.locale == locale %}active{% endif %}">
+                {{ form_errors(translationsFields) }}
+                {{ form_widget(translationsFields) }}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block orangegate_translationsForms_widget %}
+    {{ block('canabelle_cms_translations_widget') }}
+{% endblock %}
