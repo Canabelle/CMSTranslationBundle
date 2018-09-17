@@ -7,8 +7,7 @@
     "license": "MIT",
     "require": {
         "symfony/symfony": "~2.7",
-        "doctrine/orm": "~2.4,<2.5",
-        "ok99/privatezone-admin-bundle": "~1.0@dev"
+        "doctrine/orm": "~2.4,<2.5"
     },
     "require-dev": {
     },
