@@ -37,7 +37,7 @@ class ImportTokensCommand extends ContainerAwareCommand
 
         $services = $container->getServiceIds();
 
-        $sites = $em->getRepository('SymbioOrangeGatePageBundle:Site')->findAll();
+        $sites = $em->getRepository('Ok99PrivateZonePageBundle:Site')->findAll();
         $tokens = [];
 
         // find tokens in src files
@@ -52,7 +52,7 @@ class ImportTokensCommand extends ContainerAwareCommand
                     $tokenSite = $site;
                     $tokenName = str_replace("\"", '', str_replace('\'', '', $matches[0]));
                     $add = true;
-                } elseif (preg_match('/\'orangegate\.(.*)\'/', $fileContent, $matches) || preg_match('/\"orangegate\.(.*)\"/', $fileContent, $matches)) {
+                } elseif (preg_match('/\'canabelle_cms\.(.*)\'/', $fileContent, $matches) || preg_match('/\"canabelle_cms\.(.*)\"/', $fileContent, $matches)) {
                     $tokenName = str_replace("\"", '', str_replace('\'', '', $matches[0]));
                     $add = true;
                 }
@@ -96,10 +96,10 @@ class ImportTokensCommand extends ContainerAwareCommand
         }
 
         //find tokens in cms bundles
-        $cmsFinder->files()->in($this->getContainer()->get('kernel')->getRootDir().'/../vendor/symbio')->notName('*.json');
+        $cmsFinder->files()->in($this->getContainer()->get('kernel')->getRootDir().'/../vendor/canabelle')->notName('*.json');
         foreach ($cmsFinder as $file) {
             $fileContent = file_get_contents($file->getRealPath());
-            if (preg_match('/\'orangegate\.(.*)\'/', $fileContent, $matches) || preg_match('/\"orangegate\.(.*)\"/', $fileContent, $matches)) {
+            if (preg_match('/\'canabelle_cms\.(.*)\'/', $fileContent, $matches) || preg_match('/\"canabelle_cms\.(.*)\"/', $fileContent, $matches)) {
                 $tokenName = str_replace("\"", '', str_replace('\'', '', $matches[0]));
                 if (!in_array($tokenName, $services) && !in_array($tokenName, $tokens)) {
                     $catalogueName = "";

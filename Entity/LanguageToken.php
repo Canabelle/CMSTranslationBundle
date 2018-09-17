@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LanguageToken
  *
- * @ORM\Table('language_token')
+ * @ORM\Table(name="language_token")
  * @ORM\Entity(repositoryClass="Canabelle\CMSTranslationBundle\Entity\LanguageTokenRepository")
  */
 class LanguageToken

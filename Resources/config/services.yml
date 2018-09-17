@@ -42,31 +42,31 @@ services:
         class: %canabelle_cms_translation.default.type.translations.class%
         arguments: [@canabelle_cms_translation.default.listener.translations, %canabelle_cms_translation.locales%, %canabelle_cms_translation.default_locale%, %canabelle_cms_translation.required_locales%]
         tags:
-            - { name: form.type, alias: orangegate_translations }
+            - { name: form.type, alias: canabelle_cms_translations }
 
     canabelle_cms_translation.default.type.translationsFields:
         class: %canabelle_cms_translation.default.type.translationsFields.class%
         tags:
-            - { name: form.type, alias: orangegate_translationsFields }
+            - { name: form.type, alias: canabelle_cms_translationsFields }
 
     canabelle_cms_translation.default.type.translationsForms:
         class: %canabelle_cms_translation.default.type.translationsForms.class%
         arguments: [@canabelle_cms_translation.default.service.translation, @canabelle_cms_translation.default.listener.translationsForms, %canabelle_cms_translation.locales%, %canabelle_cms_translation.default_locale%, %canabelle_cms_translation.required_locales%]
         tags:
-            - { name: form.type, alias: orangegate_translationsForms }
+            - { name: form.type, alias: canabelle_cms_translationsForms }
 
     canabelle_cms_translation.default.type.translationsLocalesSelector:
         class: %canabelle_cms_translation.default.type.translationsLocalesSelector.class%
         arguments: [%canabelle_cms_translation.locales%, %canabelle_cms_translation.default_locale%]
         tags:
-            - { name: form.type, alias: orangegate_translationsLocalesSelector }
+            - { name: form.type, alias: canabelle_cms_translationsLocalesSelector }
 
     canabelle_cms_translation.default.type.translatedEntity:
         class: %canabelle_cms_translation.default.type.translatedEntity.class%
         calls:
             - [ setRequest, [@request_stack] ]
         tags:
-            - { name: form.type, alias: orangegate_translatedEntity }
+            - { name: form.type, alias: canabelle_cms_translatedEntity }
 
     canabelle_cms_translation.language_token.repository:
         class:           Doctrine\ORM\EntityRepository

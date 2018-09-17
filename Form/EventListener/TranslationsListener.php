@@ -34,7 +34,7 @@ class TranslationsListener implements EventSubscriberInterface
 
         foreach ($formOptions['locales'] as $locale) {
             if (isset($fieldsOptions[$locale])) {
-                $form->add($locale, 'orangegate_translationsFields', array(
+                $form->add($locale, 'canabelle_cms_translationsFields', array(
                     'data_class' => $translationClass,
                     'fields' => $fieldsOptions[$locale],
                     'required' => in_array($locale, $formOptions['required_locales'])

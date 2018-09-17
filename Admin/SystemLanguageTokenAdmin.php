@@ -11,7 +11,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class SystemLanguageTokenAdmin extends BaseAdmin
 {
-    protected $baseRouteName = 'admin_orangegate_translation_systemlanguagetoken';
+    protected $baseRouteName = 'admin_canabelle_cms_translation_systemlanguagetoken';
     protected $baseRoutePattern = 'translation/system-languagetoken';
 
     protected function configureFormFields(FormMapper $formMapper)

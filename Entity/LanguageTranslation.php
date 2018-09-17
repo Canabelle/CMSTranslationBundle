@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LanguageTranslation
  *
- * @ORM\Table('language_translation')
+ * @ORM\Table(name="language_translation")
  * @ORM\Entity(repositoryClass="Canabelle\CMSTranslationBundle\Entity\LanguageTranslationRepository")
  */
 class LanguageTranslation

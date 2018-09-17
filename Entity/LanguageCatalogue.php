@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LanguageCatalogue
  *
- * @ORM\Table('language_catalogue')
+ * @ORM\Table(name="language_catalogue")
  * @ORM\Entity()
  * @UniqueEntity("name")
  */
