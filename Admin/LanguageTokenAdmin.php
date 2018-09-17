@@ -8,6 +8,7 @@ use Ok99\PrivateZoneCore\PageBundle\Entity\Site;
 use Ok99\PrivateZoneCore\PageBundle\Entity\SitePool;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\PageBundle\Model\SiteInterface;
@@ -20,6 +21,14 @@ class LanguageTokenAdmin extends BaseAdmin
 
     /** @var SitePool */
     protected $sitePool;
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        if (!$this->isAdmin()) {
+            $collection->remove('create');
+            $collection->remove('delete');
+        }
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -65,11 +74,15 @@ class LanguageTokenAdmin extends BaseAdmin
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-            ->addIdentifier('token')
-            ->addIdentifier('catalogue')
-            ->addIdentifier('site')
-            ->add('_action', 'actions', array(
+        $listMapper->addIdentifier('token');
+
+        if ($this->isAdmin()) {
+            $listMapper
+                ->addIdentifier('catalogue')
+                ->addIdentifier('site');
+        }
+
+        $listMapper->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
                     'delete' => array(),
@@ -133,6 +146,23 @@ class LanguageTokenAdmin extends BaseAdmin
         }
 
         return $instance;
+    }
+
+    /**
+     * @param null|LanguageToken $object
+     * @return bool
+     */
+    public function isAdmin($object = null)
+    {
+        return $object ? $this->isGranted('ADMIN', $object) : $this->isGranted('ADMIN');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuperAdmin()
+    {
+        return $this->isGranted('ROLE_SUPER_ADMIN');
     }
 
     /**
