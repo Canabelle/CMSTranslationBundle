@@ -80,7 +80,20 @@ class TranslationForm implements TranslationFormInterface
 
                 // General options for all locales
                 } else {
+                    $origFieldOptions = null;
                     foreach ($options['locales'] as $locale) {
+                        if (is_null($origFieldOptions)) {
+                            $origFieldOptions = $fieldOptions;
+                        }
+
+                        if (isset($origFieldOptions['keys']) && is_array($origFieldOptions['keys'])) {
+                            foreach($origFieldOptions['keys'] as $fieldOptionKeyIndex => $fieldOptionKey) {
+                                if (isset($fieldOptionKey[2]) && is_array($fieldOptionKey[2]) && isset($fieldOptionKey[2]['data']) && isset($fieldOptionKey[2]['data'][$locale])) {
+                                    $fieldOptions['keys'][$fieldOptionKeyIndex][2]['data'] = $fieldOptionKey[2]['data'][$locale];
+                                }
+                            }
+                        }
+
                         $fieldsOptions[$locale][$field] = $fieldOptions;
                     }
                 }
